@@ -1,0 +1,43 @@
+<h2>Prediksi 1 Jurnal</h2>
+<form id="single-form">
+  <textarea id="single-text" rows="5" cols="80" placeholder="Masukkan judul + abstrak..."></textarea><br>
+  <button type="submit">Prediksi</button>
+</form>
+<pre id="single-result"></pre>
+
+<h2>Prediksi Banyak Jurnal (Upload File)</h2>
+<form id="batch-form" enctype="multipart/form-data">
+  <input type="file" name="file" accept=".csv,.xlsx">
+  <button type="submit">Upload dan Prediksi</button>
+</form>
+<a id="download-link" style="display:none;" target="_blank">Download hasil prediksi</a>
+
+<script>
+document.getElementById("single-form").onsubmit = async (e) => {
+  e.preventDefault();
+  const text = document.getElementById("single-text").value;
+  const res = await fetch("/api/predict", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ text })
+  });
+  const data = await res.json();
+  document.getElementById("single-result").textContent = JSON.stringify(data.predicted_sdgs, null, 2);
+};
+
+document.getElementById("batch-form").onsubmit = async (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const res = await fetch("/api/batch_predict", {
+    method: "POST",
+    body: formData
+  });
+  const blob = await res.blob();
+  const url = window.URL.createObjectURL(blob);
+  const a = document.getElementById("download-link");
+  a.href = url;
+  a.download = "hasil_prediksi.xlsx";
+  a.textContent = "Download hasil prediksi";
+  a.style.display = "inline";
+};
+</script>
