@@ -1,7 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from pydantic import BaseModel
 from transformers import BertTokenizer, BertForSequenceClassification
-from functools import lru_cache
 import torch
 
 app = FastAPI()
