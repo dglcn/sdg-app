@@ -1,6 +1,0 @@
-fastapi
-transformers
-torch
-pandas
-openpyxl
-uvicorn
