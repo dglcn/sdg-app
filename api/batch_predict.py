@@ -6,9 +6,9 @@ import io
 
 app = FastAPI()
 
-model = BertForSequenceClassification.from_pretrained("model/checkpoint-2885")
-tokenizer = BertTokenizer.from_pretrained("model/checkpoint-2885")
-model.eval()
+model_path = "degolcen/sdg-bert-model"
+tokenizer = BertTokenizer.from_pretrained(model_path)
+model = BertForSequenceClassification.from_pretrained(model_path)
 
 @app.post("/")
 async def batch_predict(file: UploadFile = File(...)):
