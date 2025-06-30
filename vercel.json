@@ -5,6 +5,7 @@
   ],
   "routes": [
     { "src": "/api/predict", "dest": "api/predict.py" },
-    { "src": "/api/batch_predict", "dest": "api/batch_predict.py" }
+    { "src": "/api/batch_predict", "dest": "api/batch_predict.py" },
+    { "src": "/", "dest": "/index.html" }
   ]
 }
