@@ -4,13 +4,9 @@
       "runtime": "python3.9"
     }
   },
-  "builds": [
-    { "src": "api/predict.py", "use": "@vercel/python" },
-    { "src": "api/batch_predict.py", "use": "@vercel/python" }
-  ],
   "routes": [
-    { "src": "/api/predict", "dest": "api/predict.py" },
-    { "src": "/api/batch_predict", "dest": "api/batch_predict.py" },
+    { "src": "/api/predict", "dest": "/api/predict.py" },
+    { "src": "/api/batch_predict", "dest": "/api/batch_predict.py" },
     { "src": "/", "dest": "/index.html" }
   ]
 }
